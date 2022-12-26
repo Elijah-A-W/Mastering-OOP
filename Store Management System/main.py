@@ -1,3 +1,7 @@
+import csv
+import pandas as pd
+
+
 class Item:
     pay_rate = 0.8        # pay rate variable showing amount to be paid after discount.
     all = [ ]             # created a list to append all instance( value-attributes created )
@@ -19,21 +23,34 @@ class Item:
         Item.all.append(self)
 
 
-
-
     def get_tot_price(self):
         return self.price * self.quantity
 
     def apply_discount(self):
         self.price = self.price * self.pay_rate
 
+    @classmethod
+    def intantiate_from_csv(cls):
+        with open('D:\Developments\Mastering Classes\Store Management System\items.csv', 'r') as f:
+            reader = csv.DictReader(f)
+            items = list(reader) 
+
+        for item in items:
+            print(Item)
+ 
+    def __repr__(self):
+        return f"Item('{self.name}', {self.price}, {self.quantity})"
 
 
-first2 = Item('tourch', 200, 9)
-first1 = Item('radio', 200, 1)
-
-
+Item.intantiate_from_csv()
 print(Item.all)
+
+
+# first2 = Item('tourch', 200, 9)
+# first1 = Item('radio', 200, 1)
+
+# print(Item.all)
+
 
 
 
